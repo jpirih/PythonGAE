@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+    <!-- Na tej spletni strani sem se najbolj osredotočil na HTML nekaj malega stilov sem dodal za razbijanje
+ monotonosti in boljšo preglednost ostalo pa v četrtek, ko bomo imeli CSS - menda znotraj HTML ni priporčljivo-->
+    
+    <!-- Odpravil sem nekaj napak pri linkih za vsebino, v tabeli in pri seznamih, še vedno pa validator
+stoka pri vdelanih elementih  - ne znam rešit-->
+    <head>
+        <meta charset="UTF-8" >
+        <meta name ="description" content="Janko Fakebook profil">
+        <meta name="keywords" content="učenje, HTML, osnove,CSS">
+        <link rel="stylesheet" href="main.css" type="text/css">
+        <title>Janko's Fakebook Profil</title>
+    </head>
+    <body>
+     
+      <div id="iskalnik">
+              Iskalnik: <input type="text" placeholder="Išči ljudi kraje in predmete ">
+              <input type="button" value="Išči" name="find"> 
+      </div>
+       <!-- Meni levo zgoraj navigacija po strani -->
+        <div id="levi" class="menuLinks">
+        <h3>Vsebina</h3>
+         <ul>
+            <li><a href="#jaz">O meni</a></li>
+            <li><a href="#aktivnosti">Aktivnosti</a></li>
+            <li><a href="#frej">Prosi Čas</a></li>
+            <li><a href="#naj">Najbolj priljubljeno</a></li>
+            <li><a href="#not">Manj priljubljene</a></li>
+            <li><a href="#kontakt">Kontakt Lokacija</a></li>
+        </ul>
+       </div>
+       <!-- Desni meni uporabne povezave zelen -->
+       <div id="desni" class="menuLinks">
+        <h3>Uporabne povezve</h3>
+        <ol>
+            <li><a href="https://www.google.si/">Google</a></li>
+            <li><a href="http://www.rtvslo.si/">Rtv Slo</a></li>
+            <li><a href="http://www.nkbm.si/">NovaKbm</a></li>
+            <li><a href="https://www.youtube.com/">Youtube.com</a></li>
+        </ol>
+       </div>
+       <div id="vsebina">  
+           <div id="header">
+               <h1>Moj FakeBook Profil</h1>
+           </div>
+            
+            <h2>Janko Pirih</h2>
+            <!-- Prikazna slika, če klikneš nanjo prideš do pravega Facebook profila-->
+            <div>
+                <a href="https://www.facebook.com/janko.pirih" title="Original FB profil klikni"><img src="https://lh3.googleusercontent.com/-WV0ydDqSiMM/UNVestrSa_I/AAAAAAAAAik/ECdTpVIRhDc/s426/photo.jpg" alt="mojaSlika"/></a>
+            </div>
+                <br>
+            <!-- TAbela osnovni podatki -->
+            <div>
+                <table class="podatkiTabela">
+                    <tr>
+                        <th colspan="2">Osnovni Podatki</th>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td class="krepko">Izobrazba</td>
+                            <td>diplomirani ekonomist (VS) - brez prakse</td>
+                        </tr>
+                        <tr>
+                            <td class="krepko">Domači Kraj</td>
+                            <td>Podlanišče</td>
+                        </tr>
+                        <tr>
+                            <td class="krepko">Občina</td>
+                            <td>Cerkno</td>
+                        </tr>
+                        <tr>
+                            <td class="krepko">Upravna enota</td>
+                            <td>Idrija</td>
+                        </tr>
+                        <tr>
+                            <td class="krepko">Rojen</td>
+                            <td>20.8.1988</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Vsebinski razdelki kot so našteti v navigaciji strani levo zgoraj -->
+        
+           <h3 id="jaz">O Meni</h3>
+        <p>
+            Torej nekaj zelo na kratko o meni, samo zato da tisi podatki v tabeli pod sliko dobijo nekaj smisla.
+            Sem Janko Pirih po izobrazbi sicer diplomiran ekonomist vendar ekonoije prav nič ne pogrešam. Sam zase rad rečem:
+            <span class="italic">"Jest sn an čest  nawadn dilat pa tihu bit wajen pub :)."</span>   Iz tega sledi za vse, ki niste razumenli navedenega,
+            da primem za vsako delo, ki ga je potrebno opraviti, rad imam kratka in jasna navodila. Rad ima ljudi, ki govorijo malo 
+            pa še to kratko in jedrnato brez nepotrebnih olepšav in dolovezenja. 
+        </p>
+        <p>
+            Drugače pa bolj na klasičen način Rodil sem se 20. avgusta 1988 v porodnišnici Kranj očetu Janezu in Mami Olgi. Imam tri 
+            mlajše sestre od kateri sta dve že poročeni. Skupaj živimo na srednje veliki kmetiji
+            <span><a href="https://www.facebook.com/na.lanisah?ref=profile">Na lanišeh</a></span> pod
+            Ermanovcem na nadmorski višini 920 metov. Oče je doma na kmetiji  mami pa je zaposlena v podjetju 
+            <span><a href="http://www.termopol.si/tps/">Termopol d.o.o</a></span>. 
+        </p>
+        
+        <h3 id="aktivnosti">Aktivnosti</h3>
+        <p>
+            Moje vsakodnevne aktivnosti so zelo različne, kar je zelo dobro za  veliko stvari je pa včasih malo zanimivo zdrževanje. 
+        Pa bom zato, da bo krajše in bolj pregdledno  uporabil kar malo naštevanja.
+        </p> 
+        
+        <h4>Delovne izkušnje</h4>
+        <ol>
+            <li>Eta Cerkno</li>
+            <li>EF UL demonstrator</li>
+            <li>Termopol Sovoedenj</li>
+        </ol>
+        <h4>Domače aktivnosti</h4>
+        <ul>
+            <li>Pomoč pri  zunannjih opravili odvisno do dela  - trenutno lubadar (sept/okt 2015)</li>
+            <li>Razna gosopodinjska opravila - podporne aktivnosti</li>
+            <li>Delo v hlevu - (glejštajne)</li>
+            <li>Predelava mleka izdelava mlečnih izdelkov (poltrdi sir, skuta, jogurt, mladi sir)</li>
+            <li>Razno ostalo</li>
+        </ul>
+        <h4>Izobraževanje</h4>
+        <ul>
+            <li> Predelava mleka - BC Naklo</li>
+            <li>Računalniištvo(programiranje, operacijski sistemi, baze podatkov...)</li>
+        </ul>
+        <h4>Dodatno</h4>
+        <ul>
+            <li>Prostovoljno delo - mladinske skupine</li>
+            <li>Sosedska pomoč - Žernade</li>
+        </ul>            
+    
+        <h3 id="frej">Prosti čas</h3>
+        <p>
+            Prostega časa imam ponavadi zelo malo. Sploh zadnje čase zato tudi ta spletna stran ni bog ve kaj   
+            V to kategorijo pade izobraževanjein vse računalniške zadeve, polega 
+            tega pa še kakšen izlet, sprehod poslušanje glasbe. Ko zgoraj opisano aktivnosti je veiko sistem določanja priorite je
+            <span class="krepko">poslovna skirvnost</span> :). 
+        </p>
+        <h3 id="naj">Najlubše stvari</h3>
+        <p>
+            Najraje ima stvari, ki se zgodijo spontano hitro in enostavno. Tako imam tudi kar se tiče 
+            <span class="krepko">glasbe</span> rad preprosta besedila, Primer sem "pripel kar spodaj"
+            ki se jih hitro razume, žaner ni tako pomemben.  Od <span class="krepko">Filmov</span> pa imam najraje Romantične komedije.
+        </p>
+        <!-- Kodo za vdelavo video klipa sem skopiral z youtube.com, čerav vem da kopiranje ni zaželjeno -->
+        <div class="video sredinsko">
+            <iframe src="https://www.youtube.com/embed/YvrmWfzNOVo" frameborder="0" allowfullscreen></iframe>     
+        </div>
+        <p>
+            Ker pa je že govora o naj stvareh je prav da dodam, še po moje najlepši razgled na svetu "od Doma na Porezen"
+        </p>
+        <div class="sredinsko">
+            <img src="https://scontent-vie1-1.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12122394_10205915632663755_3974702470375102638_n.jpg?oh=ce556090c056d5c39fd7562c9cc79345&oe=56CE3B6F" alt="Porezen">
+            
+        </div>
+        <h3 id="not">Manj priljubljene stvari</h3>
+        <p>
+            Takih stvari sicer je nekaj ni jih pa veliko. Na tem mestu bom izpostavil samo eno. Najbolj me zjezi naslednje: 
+            <span>Ko sredi belega dne recimo od 10-ih dopoldne srečam človeka, ki se mu nič ne ljubi.</span> "Dobim pike avtomatsko".
+        </p>
+        <h3 id="kontakt">Kontakt - Lokacija</h3>
+        <p>
+            Ta razdelek sem želel dodati, za vse tiste, ki mislijo, da živim na koncu sveta. Citat enega dostavljalca hitre pošte, ko
+            sem ga le pregovoril naj mi paket prosim prinese domov:
+            <span class="italic">Pa kje vi to žvite :)</span>
+        </p>
+        <!-- Kodo za vdelavo zemljvida sem skopiral z google maps, čerav vem da kopiranje ni zaželjeno -->
+        <p>Ker so nekateri podatki že zgoraj dodam na tem mestu samo še zemljevid - Vir google- maps</p>
+        <div class="video sredinsko">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2765.8399544322733!2d14.031119999999994!3d46.11409599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477ae62aa0a1fc03%3A0x83f0940e07c4f71!2sPodlani%C5%A1%C4%8De+15%2C+5282+Cerkno!5e0!3m2!1ssl!2ssi!4v1444150600601" frameborder="0" allowfullscreen></iframe>
+        </div>
+           <!--Copyright messsage - čisto na koncu vsebine -->
+            <div id="footer">
+                 <span class="krepko">Vse kar piše je res - Je pa tudi res, da ni vse napisano :) - Janko oktober 2015</span>
+            </div>
+            
+        </div>
+        <!-- Tekst in logo desno spodaj-->
+       <div id="logo">
+            <p>
+            Za dodatne informacije o lokaciji: <span class="krepko">kliknite spodnjo sliko</span>
+        </p>
+        <div>
+            <a href="https://www.facebook.com/na.lanisah?ref=profile"><img src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/12096377_643285985811337_5466182725837335246_n.png?oh=bd51f6c2655d0888dd689f01fce4a243&oe=5698D40F&__gda__=1452812727_d636cf664f39bbf6e60d70d12bb7221f"  alt="Logo Na Laniseh"/></a>
+           </div>
+        </div>
+        
+    </body>
+</html>
