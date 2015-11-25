@@ -1,0 +1,37 @@
+.navbar-inverse {
+    background-color: green;
+}
+.sredinsko {
+    text-align: center;
+    margin: 0 auto;
+}
+.krepko{
+    font-weight: bold;
+}
+.jumbotron{
+    border: 2px solid green;
+}
+.img{
+    max-width: 640px;
+    max-height: 320px;
+}
+.navbar-brand{
+    color: white;
+}
+.container {
+    padding-bottom: 120px;
+}
+.copyright{
+    font-size 1.5em;
+
+}
+.italic{
+    font-style: italic;
+}
+.video {
+    width:100%;
+}
+.video iframe{
+    width: 640px;
+    height: 480px;
+
