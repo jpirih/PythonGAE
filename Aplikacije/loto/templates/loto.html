@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Janko Pirih">
+    <meta name="description" content="My home page test GAE, webapp2, Jinja2, bootstrap, html, css, first web app ">
+    <meta name="keywords" content="test GAE, webapp2, Jinja2, bootstrap, html, css, first web ap">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <title>Loto</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>Loto kombinacija</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Srečna kombinacija</h1>
+        <p>
+            Računalnik je zate izbral naslednjo srečno kombinacijo: <br>
+            {{kombinacija}}
+        </p>
+        <button class="btn btn-danger">
+            <a href="/">Nazaj</a>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert">
+                <span class="krepko">Hvala za sodelovanje!</span> <br>
+                Kot že rečeno ne zagotavljam uspeha, lahko pa poskusiš vplačati Držim pesti
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
