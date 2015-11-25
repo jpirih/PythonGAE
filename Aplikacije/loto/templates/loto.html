@@ -24,7 +24,9 @@
         <h1>Srečna kombinacija</h1>
         <p>
             Računalnik je zate izbral naslednjo srečno kombinacijo: <br>
-            {{kombinacija}}
+            {% for item in kombinacija %}
+                <span>{{item}},</span>
+            {% endfor %}
         </p>
         <button class="btn btn-danger">
             <a href="/">Nazaj</a>

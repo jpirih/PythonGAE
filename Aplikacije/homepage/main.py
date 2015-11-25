@@ -5,6 +5,7 @@ import webapp2
 import datetime
 
 
+
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
 
@@ -68,8 +69,5 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/contact', ContactHandler),
     webapp2.Route('/projects', ProjectsHandler),
 ], debug=True)
-
-
-
 
 
