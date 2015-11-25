@@ -1,0 +1,4 @@
+V tem repositoriju je samo test delovanja  GAE SDK  na prenosnem raèunalniku 
+HP Probook 
+
+Lep pozdrav Janko 
