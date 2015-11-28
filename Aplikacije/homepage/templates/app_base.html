@@ -15,14 +15,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <!-- moj css spremembe bootstrap-a -->
     <link rel="stylesheet" href="/assets/css/style.css">
+   
     <!-- Browser tab title -->
-    <title>Projekti</title>
+    <title>{% block title %} {% endblock title %}</title>
 </head>
 <body>
 <!-- navigacija zgoraj  -->
     <div class="navbar navbar-inverse navbar-static-top">
         <div class="container-fulid">
-            <span class="navbar-brand">Projekti</span>
+            <a href="/projects" class="navbar-brand">Projekti </a>
             <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -40,37 +41,15 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    
+     <div class="container">
         <!-- Naslov -->
-         <div class="jumbotron">
             <div class="sredinsko">
-                <h1>Projekti</h1>
-                <p>
-                   Na tej strani bodo povezave do vseh sorte stvari s katerimi se bolj ali manj ukvarjam :)
-                </p>
+                <h2>{% block naslov %}{% endblock naslov %}</h2>
             </div>
+            <div class="row">{% block vsebina %}{% endblock vsebina %}</div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="sredinsko">Dobrodošli! - spletna stran je v izdelavi</h2>
-            </div>
-        </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>Aplikacije</h3>
-                    <ul class="nav nav-pills">
-                      <li role="presentation" class="btn btn-success"><a href="/projects/kalkulator">Kalkulator</a></li>
-                      <li role="presentation" class="btn btn-warning"><a href="/projects/pretvornik">Pretvornik Enot</a></li>
-                      <li role="presentation" class="btn btn-danger"><a href="/projects/stevilo">Skirto Število</a></li>
-                      <li role="presentation" class="btn btn-success"><a href="http://enhanced-victor-113610.appspot.com/">Loto</a></li>
-                    </ul>
-                    
-                </div>
-                </div>
-            </div>
-
-<!-- Navigacija Spodaj-->
+         <!-- Navigacija Spodaj-->
     <div class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="container-fulid">
             <span class="navbar-brand">Janko Pirih November 2015</span>
@@ -92,5 +71,6 @@
         </div>
     </div>
 
+
+    
 </body>
-</html>
