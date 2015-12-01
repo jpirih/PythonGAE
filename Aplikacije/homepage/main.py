@@ -4,8 +4,8 @@ import os
 import jinja2
 import webapp2
 import datetime
-
-
+from gl_mesto_handlers import *
+import random
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
@@ -157,8 +157,21 @@ class SteviloHandler(BaseHandler):
             if ValueError:
                 return self.render_template("skrito_stevilo.html", params=params)
 
+# kontroler za aplikacijo  ugani glavno mesto   objekt in funcije so v
+# datoteki gl_mesto_handlers.py
 
+class PrestolnicaHandler(BaseHandler, GlavnoMesto):
+    def get(self):
+        city = random.choice(seznam)
+        mesto = city.ime
+        drzava = city.drzava
+        slika = city.slika
 
+        params ={"mesto":mesto,"drzava":drzava, "img":slika}
+        return self.render_template("gl_mesto.html",params=params)
+
+    def post(self):
+        vnos = self.request.get("vnos_mesto")
 
 
 # Route - navigacija po spletnem mestu
@@ -172,7 +185,11 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/projects/kalkulator', KalkulatorHandler),
     webapp2.Route('/projects/pretvornik', PretvornikHandler),
     webapp2.Route('/projects/stevilo', SteviloHandler),
+    webapp2.Route('/projects/prestolnica',PrestolnicaHandler),
 
 ], debug=True)
+
+
+
 
 

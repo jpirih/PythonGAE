@@ -1,0 +1,4 @@
+dunaj,Avstrija,/assets/img/prestolnice/dunaj.jpg
+bruselj,Belgija,/assets/img/prestolnice/bruselj.jpg
+sofija,Bolgarija,/assets/img/prestolnice/sofija.jpg
+nikozija,Ciper,/assets/img/prestolnice/nikozija.jpg
