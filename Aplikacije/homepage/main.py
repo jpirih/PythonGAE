@@ -5,7 +5,9 @@ import jinja2
 import webapp2
 import datetime
 from gl_mesto_handlers import *
+from forenzik_logika import *
 import random
+
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
@@ -152,15 +154,14 @@ class SteviloHandler(BaseHandler):
 
             params = {"message":sporocilo, "bravo":bravo}
             return self.render_template("skrito_stevilo.html", params=params)
-        except:
+        except ValueError:
             params = {"vnos_err":vnos_error}
-            if ValueError:
-                return self.render_template("skrito_stevilo.html", params=params)
+            return self.render_template("skrito_stevilo.html", params=params)
 
 # kontroler za aplikacijo  ugani glavno mesto   objekt in funcije so v
 # datoteki gl_mesto_handlers.py
 
-class PrestolnicaHandler(BaseHandler, GlavnoMesto):
+class PrestolnicaHandler(BaseHandler):
     def get(self):
         city = random.choice(seznam)
         mesto = city.ime
@@ -171,7 +172,46 @@ class PrestolnicaHandler(BaseHandler, GlavnoMesto):
         return self.render_template("gl_mesto.html",params=params)
 
     def post(self):
-        vnos = self.request.get("vnos_mesto")
+        vneseno_mesto = self.request.get("vnos_mesto")
+        vneseno_mesto = vneseno_mesto.lower()
+        izbrano_mesto = self.request.get("mesto")
+
+        # spremenljivke za parametre
+        bravo = ""
+        napaka = ""
+
+        if checkAnswer(izbrano_mesto,vneseno_mesto):
+            bravo = "Res je"
+        else:
+            napaka = " Napaka !!"
+
+        slika = "/assets/img/kekec.JPG"
+        parametri = {"pravilno":bravo, "narobe":napaka, "img": slika}
+        return self.render_template("gl_mesto.html", params=parametri)
+
+# Kontroler za aplikacijo Forenzik
+class ForenzikHandler(BaseHandler):
+    def get(self):
+
+        return self.render_template("forenzik.html")
+
+    def post(self):
+        dna = self.request.get("vnos_dna")
+        lastnosti = seznam_vseh_lastnosti
+
+        lastnosti_cloveka = []
+
+        for lastnost in lastnosti:
+            if lastnost in dna:
+                lastnosti_cloveka.append(lastnosti[lastnost])
+
+
+        params = {"lastnosti":lastnosti_cloveka}
+        return self.render_template("forenzik.html", params=params)
+
+
+
+
 
 
 # Route - navigacija po spletnem mestu
@@ -186,6 +226,7 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/projects/pretvornik', PretvornikHandler),
     webapp2.Route('/projects/stevilo', SteviloHandler),
     webapp2.Route('/projects/prestolnica',PrestolnicaHandler),
+    webapp2.Route('/projects/forenzik', ForenzikHandler)
 
 ], debug=True)
 

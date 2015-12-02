@@ -1,57 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Janko Pirih">
-    <meta name="description" content="My home page test GAE, webapp2, Jinja2, bootstrap, html, css, first web app ">
-    <meta name="keywords" content="test GAE, webapp2, Jinja2, bootstrap, html, css, first web ap">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+{% extends "base.html"%}
+{%block head%}<link rel="stylesheet" href="/assets/css/blog.css">{%endblock head%}
+{%block title%}Blog{%endblock title%}
+{%block title_stran%}Blog{%endblock title_stran%}
+{%block blog %}active{% endblock blog %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!-- moj css spremembe bootstrap-a -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/blog.css">
+{%block naslov%}Blog{%endblock naslov%}
+{%block opis%}Na tem blogu bom pisal samo lepe stvari{%endblock opis%}
 
-    <title>Blog</title>
-</head>
-<body>
-    <!-- navigacija zgoraj  -->
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fulid">
-            <span class="navbar-brand">Blog</span>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navbarHeader">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Domov</a></li>
-                    <li><a href="/about">O meni</a></li>
-                    <li class="active"><a href="/blog">Blog</a></li>
-                    <li><a href="/activities">Aktivnosti</a></li>
-                    <li><a href="/projects">Projekti</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <!-- Naslov -->
-         <div class="jumbotron">
-            <div class="sredinsko">
-                <h1>Blog</h1>
-                <p>
-                    Na tem blogu bom pisal samo lepe stvari
-                </p>
-            </div>
-        </div>
-        <div class="row">
+{%block vsebina%}
+    <div class="row">
             <div class="col-sm-9">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -63,7 +20,7 @@
                             zavil levo v dolino Davče.
                         </p>
                          <p>
-                             Iz Davče, kjer je pustil avto, je šel peš do kranjskega hrbta in po cesti do Koče na Poreznu, ki je pravzaprav predelana stara
+                             Iz Davče, kjer je pustil avto, je šel peš do kranjskega hrbta in po cesti do Koče na Poreznu, ki je pravzaprav                                 predelana stara
                              vojaška karavla iz prve svetovne vojne, na šilce.
                          </p>
                          <p>
@@ -93,27 +50,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container-fulid">
-            <span class="navbar-brand">Janko Pirih November 2015</span>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navbarHeader">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Domov</a></li>
-                    <li><a href="/about">O meni</a></li>
-                    <li class="active"><a href="/blog">Blog</a></li>
-                    <li><a href="/activities">Aktivnosti</a></li>
-                    <li><a href="/projects">Projekti</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
-</body>
-</html>
+{%endblock vsebina%}
+
+{%block blog_sp%}active{%endblock blog_sp%}
+
+
+
+

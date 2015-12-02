@@ -1,8 +1,7 @@
 import csv
-import random
-
 
 #  objekt Glavno mesto
+
 class GlavnoMesto(object):
     ime = "ime glavnega mesta"
     drzava = "drzava glavnega mesta"
@@ -33,9 +32,10 @@ def getData(source):
             list_of_cities.append(gl_mesto)
         return list_of_cities
 
+# ustvari seznam objektov, ki ga uporablja get fukcija znotraj PrestolnicaHandler-ja
+# za nakljucno izbiranje mest
 seznam = getData("source.txt")
-for item in seznam:
-    print item.ime
+
 
 
 

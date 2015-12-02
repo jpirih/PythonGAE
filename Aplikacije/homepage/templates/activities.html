@@ -1,56 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Janko Pirih">
-    <meta name="description" content="My home page test GAE, webapp2, Jinja2, bootstrap, html, css, first web app ">
-    <meta name="keywords" content="test GAE, webapp2, Jinja2, bootstrap, html, css, first web ap">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+{%extends "base.html"%}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!-- moj css spremembe bootstrap-a -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/activities.css">
-    <title>Aktivnosti</title>
-</head>
-<body>
-    <!-- navigacija zgoraj  -->
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fulid">
-            <span class="navbar-brand">Aktivnosti</span>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navbarHeader">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Domov</a></li>
-                    <li><a href="/about">O meni</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li class="active"><a href="/activities">Aktivnosti</a></li>
-                    <li><a href="/projects">Projekti</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <!-- Naslov -->
-         <div class="jumbotron">
-            <div class="sredinsko">
-                <h1>Aktivnosti</h1>
-                <p>
-                    V glavnem ni mi dolgčas :)
-                </p>
-            </div>
-        </div>
-        <div class="row">
+{%block head%}<link rel="stylesheet" href="/assets/css/activities.css">{%endblock head%}
+
+{%block title%}Aktivnosti{% endblock title %}
+
+{%block title_stran%}Aktivnosti{%endblock title_stran%}
+{%block aktivnost%}active{%endblock aktivnost%}
+
+{%block naslov%}Aktivnosti{%endblock naslov%}
+{%block opis%} V glavnem ni mi dolgčas :){%endblock opis%}
+
+{%block vsebina%}
+   <div class="row">
             <div class="col-sm-3">
                 <h4>Delovne izkušnje</h4>
                 <ol>
@@ -84,27 +45,6 @@
                 </ul>
             </div>
         </div>
-    </div>
-     <div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container-fulid">
-            <span class="navbar-brand">Janko Pirih November 2015</span>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navbarHeader">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Domov</a></li>
-                    <li><a href="/about">O meni</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li class="active"><a href="/activities">Aktivnosti</a></li>
-                    <li><a href="/projects">Projekti</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+{%endblock vsebina%}
 
-</body>
-</html>
+{%block aktivnost_sp%}active{%endblock aktivnost_sp%}

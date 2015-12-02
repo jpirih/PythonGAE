@@ -1,63 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Janko Pirih">
-    <meta name="description" content="My home page test GAE, webapp2, Jinja2, bootstrap, html, css, first web app ">
-    <meta name="keywords" content="test GAE, webapp2, Jinja2, bootstrap, html, css, first web ap">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+{%extends "base.html" %}
+{%block title%}Projekti{%endblock title%}
+{%block title_stran%}Projekti{%endblock title_stran%}
+{%block projekti%}active{%endblock projekti%}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!-- moj css spremembe bootstrap-a -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <!-- Browser tab title -->
-    <title>Projekti</title>
-</head>
-<body>
-<!-- navigacija zgoraj  -->
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container-fulid">
-            <span class="navbar-brand">Projekti</span>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navbarHeader">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Domov</a></li>
-                    <li><a href="/about">O meni</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/activities">Aktivnosti</a></li>
-                    <li class="active"><a href="/projects">Projekti</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <!-- Naslov -->
-         <div class="jumbotron">
-            <div class="sredinsko">
-                <h1>Projekti</h1>
-                <p>
-                   Na tej strani bodo povezave do vseh sorte stvari s katerimi se bolj ali manj ukvarjam :)
-                </p>
-            </div>
-        </div>
+{%block naslov%}Projekti{%endblock naslov%}
+{%block opis%}Na tej strani bodo povezave do vseh sorte stvari s katerimi se bolj ali manj ukvarjam :){%endblock opis%}
 
-        <div class="row">
+{%block vsebina%}
+    <div class="row">
             <div class="col-sm-12">
                 <h2 class="sredinsko">Dobrodošli! - spletna stran je v izdelavi</h2>
             </div>
         </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <h3>Aplikacije</h3>
                     <ul class="nav nav-pills">
                       <li role="presentation" class="btn btn-success"><a href="/projects/kalkulator">Kalkulator</a></li>
@@ -65,33 +21,15 @@
                       <li role="presentation" class="btn btn-danger"><a href="/projects/stevilo">Skirto Število</a></li>
                       <li role="presentation" class="btn btn-success"><a href="http://enhanced-victor-113610.appspot.com/">Loto</a></li>
                       <li role="presentation" class="btn btn-warning"><a href="/projects/prestolnica">Ugani glavno mesto</a></li>
+                      <li role="presentation" class="btn btn-danger"><a href="/projects/forenzik">Forenzik</a></li>
                     </ul>
                     
                 </div>
+                <div class="col-sm-6">
+                    <h3>Računalništvo razno ostalo</h3>
                 </div>
-            </div>
+                </div>
+{%endblock vsebina%}
 
-<!-- Navigacija Spodaj-->
-    <div class="navbar navbar-inverse navbar-fixed-bottom">
-        <div class="container-fulid">
-            <span class="navbar-brand">Janko Pirih November 2015</span>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbarHeader">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse navbarHeader">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Domov</a></li>
-                    <li><a href="/about">O meni</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/activities">Aktivnosti</a></li>
-                    <li class="active"><a href="/projects">Projekti</a></li>
-                    <li><a href="/contact">Kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+{%block projekti_sp%}active{%endblock projekti_sp%}
 
-</body>
-</html>
