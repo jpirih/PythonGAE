@@ -25,7 +25,13 @@
        <div class="col-sm-4">
            <div>
               <div>
-                  <img src={{img}} alt="slika mesta" class="img img-responisive">
+                 {% if pravilno%}
+                      <img src={{img_prav}} alt="slika pravilno" class="img img-responisive">
+                  {% elif narobe %}
+                      <img src={{img_narobe}} alt="slika narobe" class="img img-responisive">
+                  {% else %}
+                      <img src={{img}} alt="slika mesta" class="img img-responisive">
+                  {% endif %}
               </div>
            </div>
        </div>

@@ -31,6 +31,7 @@
         </form>
     </div>
     <div class="col-sm-6">
+     {% if lastnosti %}
       <h3>Rezultat</h3>
       <hr>
        <div class ="alert-success">
@@ -41,6 +42,7 @@
             {% endfor %}
                
         </ul>
+        {% endif %}
        </div>
     </div>
 </div>
