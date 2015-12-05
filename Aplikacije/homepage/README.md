@@ -1,10 +1,14 @@
 # About
 
-Basic GAE project with Jinja templating engine
+My homepage in the making  under hard development :)
 
-# Usage
+# Structure
 
-1. Click on Download ZIP
-2. Save on your disk and unzip
-3. Change the application ID in app.yaml
-4. Build something nice ;)
+1. first level tabs in navigation top nad botom
+2. Some simple applications under Project's tab
+3. routing in app object in main.py
+4. Hndlers separated in files app_handlers.py
+5. Hndlers for sites are in sites_handlers.py
+6. Models for managing the datastore are in models.py
+
+

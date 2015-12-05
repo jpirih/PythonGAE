@@ -46,4 +46,8 @@
     max-width: 100%;
     height: 320px;
 }
+.nav a{
+    color: black;
+    font-weight: bold;
+}
     

@@ -1,0 +1,27 @@
+{% extends "app_base.html" %}
+
+{% block title %} Knjiga Gostov - Pregled {% endblock title %}
+
+
+{% block naslov %} Pregled vseh sporočil v Knjigi Gostov  {% endblock naslov %}
+
+
+{% block vsebina %} 
+    <div class="col-sm-8">
+        <table class="table">
+            <tr>
+                <th>Kreirano</th>
+                <th>Sporočilo</th>
+                <th>Avtor</th>
+            </tr>
+            {% for sporocilo in seznam %}
+            <tr>
+                <td>{{sporocilo.nastanek}}</td>
+                <td>{{sporocilo.sporocilo}}</td>
+                <td>{{sporocilo.ime}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-sm-4"></div>
+{% endblock vsebina %}
