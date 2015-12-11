@@ -21,7 +21,15 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/projects/forenzik', ForenzikHandler),
     webapp2.Route('/projects/guest-book', GuestBookHndler),
     webapp2.Route('/projects/guest-book/pregled', GuestBookVnosHandler),
-    webapp2.Route('/projects/guest-book/pregled-vseh', SeznamVsehVnosovHnadler),
+    webapp2.Route('/projects/guest-book/pregled-vseh', SeznamVsehVnosovHnadler, name="seznam-sporocil"),
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>', PosameznoSporociloHandler),
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/uredi', UrediSporociloHandler),
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/izbrisi', IzbirsiSporociloHandler),
+    webapp2.Route('/projects/guest-book/pregled-izbris', OznaceniZaBrisanje, name='seznam-izbirs'),
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/delete', AdminDeleteHandler),
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/delete', AdminDeleteHandler),
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/obnovi', ObnoviSporociloHandler)
+
 
 ], debug=True)
 

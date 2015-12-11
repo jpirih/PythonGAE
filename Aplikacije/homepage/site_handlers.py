@@ -64,3 +64,8 @@ class ContactHandler(BaseHandler):
 class ProjectsHandler(BaseHandler):
     def get(self):
         return self.render_template("projects.html")
+
+# kontroler administracija
+class AdminHandler(BaseHandler):
+    def get(self):
+        pass
