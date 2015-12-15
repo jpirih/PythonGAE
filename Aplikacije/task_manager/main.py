@@ -3,8 +3,8 @@ import os
 import jinja2
 import webapp2
 import datetime
-import cgi
 from models import Task
+from google.appengine.api import users
 
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -32,16 +32,40 @@ class BaseHandler(webapp2.RequestHandler):
 # osnovna stran aplikacije
 class MainHandler(BaseHandler):
     def get(self):
-        seznam = Task.query(Task.izbrisan == False).fetch()
-        params = {'seznam':seznam}
+        # preveri ali je uporabnik prijavljen
+        uporabnik = users.get_current_user()
+        # preveri ali je uporabnik administrator
+        if uporabnik and uporabnik.nickname() == 'janko.pirih':
+            logiran = True
+            admin = True
+            logout_url = users.create_logout_url('/')
+            seznam = Task.query(Task.izbrisan == False, Task.izvajalec == uporabnik.nickname()).fetch()
+            params = {'seznam':seznam, 'logiran': logiran, 'logout_url': logout_url, 'uporabnik': uporabnik, 'admin': admin}
+        # uporabnik je prijavljen ni administrator
+        elif uporabnik:
+            logiran = True
+            logout_url = users.create_logout_url('/')
+            seznam = Task.query(Task.izbrisan == False, Task.izvajalec == uporabnik.nickname()).fetch()
+            params = {'seznam':seznam, 'logiran': logiran, 'logout_url': logout_url, 'uporabnik': uporabnik}
+        # uporabnik ni prijavljen
+        else:
+            logiran = False
+            login_url = users.create_login_url('/')
+            params = {'logiran': logiran, 'login_url': login_url}
+
         return self.render_template("hello.html", params=params)
 
 # dodajanje opravila
-
 class VnosHandler(BaseHandler):
+    # uporabnik mora biti prijavljen
     def get(self):
-        return self.render_template('vnos_opravila.html')
-
+        uporabnik = users.get_current_user()
+        if uporabnik:
+            params = {'uporabnik': uporabnik}
+            return self.render_template('vnos_opravila.html', params=params)
+        else:
+            return self.redirect_to('osnovna-stran')
+# pridobi podatke iz forme vnos
     def post(self):
         try:
             naloga = self.request.get('naloga')
@@ -49,7 +73,7 @@ class VnosHandler(BaseHandler):
             opis = self.request.get('opis')
             datum = self.request.get('termin')
             izvajalec = self.request.get('izvajalec')
-
+# preveri obliko zapisa datuma ce je prazen doda trenutni datum in cas
             if datum == "":
                 danes = datetime.datetime.now()
                 termin_d = datetime.datetime.strftime(danes,'%d.%m.%Y %H:%M:%S')
@@ -57,10 +81,13 @@ class VnosHandler(BaseHandler):
             else:
                 termin = datetime.datetime.strptime(datum,'%d.%m.%Y %H:%M:%S')
 
-
+            # kreiranje objekta opravilo in shranjevanje v bazo
             opravilo = Task(naloga=naloga, prioriteta=prioriteta, opis=opis, termin=termin, izvajalec=izvajalec)
             opravilo.put()
+            # VSE OK vrne na seznam opravil
             return self.redirect_to('osnovna-stran')
+
+        # V primerru napake javi opozoirilo in uporabnik mora napako odpraviti
         except ValueError:
             err = "Datum in ura obezno v formatu d.m.YYYY H:M:S Lahko pa je prazno"
             params = {'err':err}
@@ -68,19 +95,27 @@ class VnosHandler(BaseHandler):
 
 # kontroler za urejanje in zakljucevanje opravil
 class UrediHandler(BaseHandler):
+# uporabnik mora biti prijavljen - ureja lahko samo svoja opravila
     def get(self, opravilo_id):
-        opravilo = Task.get_by_id(int(opravilo_id))
-        params = {'opravilo':opravilo}
-        return self.render_template('podrobnosti_opravila.html', params=params)
+        uporabnik = users.get_current_user()
+        if uporabnik:
+            opravilo = Task.get_by_id(int(opravilo_id))
+            params = {'opravilo':opravilo}
+            return self.render_template('podrobnosti_opravila.html', params=params)
+        else:
+            return self.redirect_to('osnovna-stran')
 
+    # Ustrezno doloci status opravila glede na spremembe, ki jih je uporabnik dolocil v formi za urejanje
+    # urejanje opisa, koncan da/ne, brisanje
     def post(self, opravilo_id):
         opravilo = Task.get_by_id(int(opravilo_id))
         finished = self.request.get('finished')
         opis = self.request.get('opis')
-        opravilo.opis = opis
 
-        if  finished == 'da':
+        opravilo.opis = opis
+        if finished == 'da':
             opravilo.finished = True
+            opravilo.spremeba_datum = datetime.datetime.utcnow()
             opravilo.put()
         elif finished == 'x':
             opravilo.izbrisan = True
@@ -90,12 +125,52 @@ class UrediHandler(BaseHandler):
 
         return self.redirect_to('osnovna-stran')
 
+# kontroler za koncana opravila
+class KoncanaOpravilaHndler(BaseHandler):
+    def get(self):
+        uporabnik = users.get_current_user()
+        if uporabnik:
+            seznam_koncano = Task.query(Task.finished == True, Task.izbrisan == False, Task.izvajalec == uporabnik.nickname()).fetch()
+            params = {'seznam_koncano': seznam_koncano, 'uporabnik': uporabnik}
+            return self.render_template('pregled-koncano.html', params=params)
+        else:
+            return self.redirect_to('osnovna-stran')
+
+# kontroler za urejanje koncanih opravil
+class PonoviOpraviloHandler(BaseHandler):
+    def get(self, opravilo_id):
+        uporabnik = users.get_current_user()
+        if uporabnik:
+            opravilo = Task.get_by_id(int(opravilo_id))
+            params = {'opravilo':opravilo}
+
+            return self.render_template('obnovi_opravilo.html', params=params)
+        else:
+            return self.redirect_to('osnovna-stran')
+
+    def post(self, opravilo_id):
+        opravilo = Task.get_by_id(int(opravilo_id))
+        opis = self.request.get('opis')
+        obnovi = self.request.get('finished')
+
+        if obnovi == 'ne':
+            opravilo.opis = opis
+            opravilo.finished = False
+            opravilo.put()
+            return self.redirect_to('osnovna-stran')
+        else:
+            opravilo.izbrisan = True
+            opravilo.put()
+            return self.redirect_to('seznam-koncanih')
 
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="osnovna-stran"),
     webapp2.Route('/dodaj-opravilo', VnosHandler),
-    webapp2.Route('/opravilo/<opravilo_id:\d+>', UrediHandler)
+    webapp2.Route('/opravilo/<opravilo_id:\d+>', UrediHandler),
+    webapp2.Route('/seznam-koncanih', KoncanaOpravilaHndler, name='seznam-koncanih'),
+    webapp2.Route('/opravilo/<opravilo_id:\d+>/ponovi', PonoviOpraviloHandler),
+
 ], debug=True)
 
 
