@@ -8,7 +8,7 @@ from app_handlers import *
 
 # Route - navigacija po spletnem mestu
 app = webapp2.WSGIApplication([
-    webapp2.Route('/', MainHandler),
+    webapp2.Route('/', MainHandler, name='main'),
     webapp2.Route('/about', AboutHandler),
     webapp2.Route('/blog', BlogHandler),
     webapp2.Route('/activities', ActivitiesHandler),
@@ -28,7 +28,9 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/projects/guest-book/pregled-izbris', OznaceniZaBrisanje, name='seznam-izbirs'),
     webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/delete', AdminDeleteHandler),
     webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/delete', AdminDeleteHandler),
-    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/obnovi', ObnoviSporociloHandler)
+    webapp2.Route('/projects/guest-book/sporocilo/<sporocilo_id:\d+>/obnovi', ObnoviSporociloHandler),
+    webapp2.Route('/registracija', RegistracijaHandler),
+    webapp2.Route('/login', LoginHndler, name='login'),
 
 
 ], debug=True)

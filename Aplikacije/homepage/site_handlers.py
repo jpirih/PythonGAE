@@ -5,7 +5,7 @@ import os
 import jinja2
 import webapp2
 import datetime
-
+from models import Uporabnik
 
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -65,7 +65,32 @@ class ProjectsHandler(BaseHandler):
     def get(self):
         return self.render_template("projects.html")
 
-# kontroler administracija
-class AdminHandler(BaseHandler):
+# kontroler registracija novega uporabnika
+class RegistracijaHandler(BaseHandler):
     def get(self):
-        pass
+        return self.render_template('registracija.html')
+
+    def post(self):
+        ime = self.request.get('ime')
+        priimek = self.request.get('priimek')
+        email = self.request.get('email')
+        geslo = self.request.get('geslo')
+        ponovno_geslo = self.request.get('ponovno_geslo')
+
+        if geslo == ponovno_geslo:
+            Uporabnik.ustvari(ime=ime, priimek=priimek, email=email, original_geslo=geslo)
+            return self.redirect_to('login')
+
+# kontroler za  prijavo uporabnikov
+class LoginHndler(BaseHandler):
+     def get(self):
+         return self.render_template('login.html')
+
+     def post(self):
+         email = self.request.get('email')
+         geslo = self.request.get('geslo')
+         uporabnik = Uporabnik.query(Uporabnik.email == email).get()
+         if Uporabnik.preveri_geslo(original_geslo=geslo, uporabnik=uporabnik):
+             return self.write('uporabnik je Logiran')
+         else:
+             return self.write('Uporabnik ni logirtan')
