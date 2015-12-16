@@ -5,8 +5,10 @@ import os
 import jinja2
 import webapp2
 import datetime
-from models import Uporabnik
-
+from models import *
+from secret import *
+import time
+import hmac
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
@@ -27,8 +29,35 @@ class BaseHandler(webapp2.RequestHandler):
     def render_template(self, view_filename, params=None):
         if not params:
             params = {}
+
+        cookie_value = self.request.cookies.get('uid')
+
+        if cookie_value:
+            params['logiran'] = self.preveri_cookie(cookie_vrednost=cookie_value)
+        else:
+            params['logiran'] = False
+
         template = jinja_env.get_template(view_filename)
         return self.response.out.write(template.render(params))
+
+    def ustvari_cookie(self, uporabnik):
+        uporabnik_id = uporabnik.key.id()
+        expires = datetime.datetime.utcnow() + datetime.timedelta(days=10)
+        expires_ts = int(time.mktime(expires.timetuple()))
+        sifra = hmac.new(str(uporabnik_id), str(secret) + str(expires_ts), hashlib.sha1).hexdigest()
+        vrednost = "{0}:{1}:{2}".format(uporabnik_id, sifra, expires_ts)
+        return  self.response.set_cookie(key='uid', value=vrednost, expires=expires)
+
+    def preveri_cookie(self, cookie_vrednost):
+        uporabnik_id, sifra, expires_ts = cookie_vrednost.split(':')
+
+        if datetime.datetime.utcfromtimestamp(float(expires_ts)) > datetime.datetime.now():
+            preverba = hmac.new(str(uporabnik_id), str(secret) + str(expires_ts), hashlib.sha1).hexdigest()
+
+            if sifra == preverba:
+                return True
+            else:
+                return False
 
 
 class MainHandler(BaseHandler):
@@ -77,9 +106,17 @@ class RegistracijaHandler(BaseHandler):
         geslo = self.request.get('geslo')
         ponovno_geslo = self.request.get('ponovno_geslo')
 
-        if geslo == ponovno_geslo:
+        mail_obstaja  = Uporabnik.query(Uporabnik.email == email).fetch()
+
+        if mail_obstaja:
+            self.write('email je ze v bazi')
+            return self.redirect('/registracija')
+        elif geslo == ponovno_geslo:
             Uporabnik.ustvari(ime=ime, priimek=priimek, email=email, original_geslo=geslo)
             return self.redirect_to('login')
+        else:
+            self.write('Gesli se ne ujemata')
+            return self.redirect('/registracija')
 
 # kontroler za  prijavo uporabnikov
 class LoginHndler(BaseHandler):
@@ -91,6 +128,7 @@ class LoginHndler(BaseHandler):
          geslo = self.request.get('geslo')
          uporabnik = Uporabnik.query(Uporabnik.email == email).get()
          if Uporabnik.preveri_geslo(original_geslo=geslo, uporabnik=uporabnik):
-             return self.write('uporabnik je Logiran')
+            self.ustvari_cookie(uporabnik=uporabnik)
+            return self.redirect('/contact')
          else:
-             return self.write('Uporabnik ni logirtan')
+             return self.write('Prišlo je do napake mail ali geslo ni pravilno ce se nisi se Registriraj :(')

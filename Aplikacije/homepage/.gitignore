@@ -55,5 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+# ena veika skrivnost
+secret.py
 
 

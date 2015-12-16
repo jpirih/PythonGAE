@@ -26,7 +26,8 @@
                 </div>
                 <div class="col-sm-6">
                     <h3>Pošlji sporočilo</h3>
-                    <form action="" method="post">
+                    {% if logiran %}
+                    <form action="/contact" method="post">
                         <div class="form-group">
                             <label for="ime">Ime in priimek</label>
                             <input type="text" class="form-control" id="ime" placeholder="Ime in priimek">
@@ -47,6 +48,24 @@
                         </div>
 
                         </form>
+                    {% else %}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Prijavi Se
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                Za pisanje sporočila moraš biti prijavljen.
+                                če še nisi registriran se najprej registraraj
+                            </p>
+                            <p>
+                                <a href="/registracija" class="btn btn-primary">Registracija</a>
+                                <a href="/login" class="btn btn-primary">Prijavi se</a>
+                            </p>
+
+                        </div>
+                    </div>
+                    {% endif %}
 
                 </div>
             </div>
