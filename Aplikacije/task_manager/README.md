@@ -1,10 +1,14 @@
 # About
 
-Basic GAE project with Jinja templating engine
+This is basic task manager applicatoion It allows you to add new
+tasks give them priorities makr them as finished, change the
+description.
 
-# Usage
+# Structure
 
-1. Click on Download ZIP
-2. Save on your disk and unzip
-3. Change the application ID in app.yaml
-4. Build something nice ;)
+1. app navigation is in main py
+2. handlers are in scritp handlers.py
+3. Google login is necessary
+4. User can only manage his / her onw tasks
+5. I hope it will help you remember all the things you need to do
+6. Enjoy!
