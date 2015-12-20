@@ -5,10 +5,11 @@ import os
 import jinja2
 import webapp2
 import datetime
-from models import *
-from secret import *
+from models import Uporabnik, Sporocilo
+from secret import secret
 import time
 import hmac
+import hashlib
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
@@ -89,6 +90,18 @@ class ContactHandler(BaseHandler):
     def get(self):
         return self.render_template("contact.html")
 
+    def post(self):
+        sporocilo = self.request.get('sporocilo')
+
+        sporocilo = Sporocilo(sporocilo=sporocilo)
+        potrditev = "Hvala za tvoje sporocilo :)"
+        sporocilo.put()
+        params = {'potrditev':potrditev}
+        return self.render_template('contact.html', params=params)
+
+
+
+
 # kontroler za  zavihek projekti
 class ProjectsHandler(BaseHandler):
     def get(self):
@@ -109,14 +122,14 @@ class RegistracijaHandler(BaseHandler):
         mail_obstaja  = Uporabnik.query(Uporabnik.email == email).fetch()
 
         if mail_obstaja:
-            self.write('email je ze v bazi')
-            return self.redirect('/registracija')
+           return self.write('email je ze v bazi')
+
         elif geslo == ponovno_geslo:
             Uporabnik.ustvari(ime=ime, priimek=priimek, email=email, original_geslo=geslo)
             return self.redirect_to('login')
         else:
-            self.write('Gesli se ne ujemata')
-            return self.redirect('/registracija')
+            return self.write('Gesli se ne ujemata')
+
 
 # kontroler za  prijavo uporabnikov
 class LoginHndler(BaseHandler):
@@ -124,11 +137,14 @@ class LoginHndler(BaseHandler):
          return self.render_template('login.html')
 
      def post(self):
-         email = self.request.get('email')
-         geslo = self.request.get('geslo')
-         uporabnik = Uporabnik.query(Uporabnik.email == email).get()
-         if Uporabnik.preveri_geslo(original_geslo=geslo, uporabnik=uporabnik):
-            self.ustvari_cookie(uporabnik=uporabnik)
-            return self.redirect('/contact')
-         else:
-             return self.write('Prišlo je do napake mail ali geslo ni pravilno ce se nisi se Registriraj :(')
+         try:
+             email = self.request.get('email')
+             geslo = self.request.get('geslo')
+             uporabnik = Uporabnik.query(Uporabnik.email == email).get()
+             if Uporabnik.preveri_geslo(original_geslo=geslo, uporabnik=uporabnik):
+                self.ustvari_cookie(uporabnik=uporabnik)
+                return self.redirect('/contact')
+             else:
+                 return self.write('Prišlo je do napake mail ali geslo ni pravilno ce se nisi se Registriraj :(')
+         except:
+             return self.write('Prislo je do Napke Pred prvo prijavo je obvezna registracija Pazi na pravilen podatkov')

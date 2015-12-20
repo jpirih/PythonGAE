@@ -38,3 +38,8 @@ class Uporabnik(ndb.Model):
             return True
         else:
             return False
+
+class Sporocilo(ndb.Model):
+    nastanek = ndb.DateTimeProperty(auto_now_add=True)
+    sporocilo = ndb.TextProperty()
+    
